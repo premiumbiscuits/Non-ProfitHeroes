@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".MainActivity" >
+    
+    <Button
+    android:paddingTop="5dp"
+    android:id="@+id/my_charities_button"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/my_charities_button"
+    android:onClick="openMyCharities" />
+    
+    <Button
+    android:id="@+id/my_calendar_button"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/my_calendar_button"
+    android:layout_below="@+id/my_charities_button"
+    android:onClick="openMyCalendar" />
+    
+    <Button
+    android:id="@+id/find_local_events_button"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/find_local_events_button"
+    android:layout_below="@+id/my_calendar_button"
+    android:onClick="openFindLocalEvents" />
+    
+    <Button
+    android:id="@+id/my_profile_button"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/my_profile_button"
+    android:layout_below="@+id/find_local_events_button"
+    android:onClick="openMyProfile" />
+    
+    <Button
+    android:id="@+id/reset_profile_button1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/reset_profile_button"
+    android:layout_below="@+id/my_profile_button"
+    android:onClick="resetProfile" />
+
+</RelativeLayout>
