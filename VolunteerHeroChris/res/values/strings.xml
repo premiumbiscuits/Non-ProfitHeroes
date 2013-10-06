@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Volunteer Hero</string>
+    <string name="action_settings">Settings</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_send">Send</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="my_charities_button">My Charities</string>
+    <string name="my_calendar_button">My Calendar</string>
+    <string name="find_local_events_button">Find Local Events</string>
+    <string name="my_profile_button">My Profile</string>
+    <string name="title_activity_my_charities">My Charities</string>
+    <string name="title_activity_my_calendar">My Calendar</string>
+    <string name="title_activity_find_local_events">Find Local Events</string>
+    <string name="title_activity_my_profile">My Profile</string>
+    <string name="title_activity_first_launch">Tell Us About Yourself</string>
+    <string name="create_profile_button">Create Profile!</string>
+    <string name="reset_profile_button">Reset</string>
+    <string name="my_profile_first">First Name:</string>
+    <string name="my_profile_last">Last Name:</string>
+    <string name="my_profile_email">Email:</string>
+    <string name="my_profile_street">Street Address:</string>
+    <string name="my_profile_city">City:</string>
+    <string name="my_profile_state">State:</string>
+    <string name="my_profile_zip">ZIP Code:</string>
+    <string name="my_profile_phone">Phone Number:</string>
+    <string name="blank"></string>
+    <string name="edit">Edit</string>
+    <string name="profile_edit">Edit Profile Field</string>
+    <string name="change">Update!</string>
+    <string name="cancel">Cancel</string>
+    <string name="new_value">New Value</string>
+    <string name="ok">OK</string>
+    <string name="unchanged">Field was not changed!</string>
+    <string name="too_long">Value entered was too long.</string>
+    <string name="bad_email">Email entered was invalid</string>
+    <string name="bad_state">State code entered was invalid, please use 2 letter capitalized abbreviation.</string>
+    <string name="bad_zip">ZIP code entered was invalid, please use XXXXX</string>
+    <string name="bad_phone">Phone number entered was invalid, please use XXXXXXXXXX</string>
+
+</resources>
