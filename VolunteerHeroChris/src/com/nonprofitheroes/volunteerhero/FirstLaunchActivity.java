@@ -8,8 +8,8 @@ import android.view.View;
 
 public class FirstLaunchActivity extends Activity {
     public static final String PREFS_NAME = "MyPrefsFile";
-    static SharedPreferences settings;
-    SharedPreferences.Editor editor;
+    static private SharedPreferences settings;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

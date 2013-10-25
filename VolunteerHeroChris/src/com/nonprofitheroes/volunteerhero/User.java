@@ -32,7 +32,7 @@ public class User {
         this.state = settings.getString("state", "DF");
         this.zip = settings.getString("zip", "12345");
         this.phoneNumber = settings.getString("phoneNumber", "5551234567");
-        this.skills = new HashSet<String>(Arrays.asList(settings.getString("skills", "defSkill1;defSkill2;defSkill3;").split(";")));
+        this.skills = new HashSet<String>(Arrays.asList(settings.getString("skills", "").split(";")));
     }
     
     public String getDeviceId(){
@@ -76,48 +76,56 @@ public class User {
     }
     
     public void setFirstName(String value){
+        this.firstName = value;
         editor = settings.edit();
         editor.putString("firstName", value);
         editor.commit();
     }
     
     public void setLastName(String value){
+        this.lastName = value;
         editor = settings.edit();
         editor.putString("lastName", value);
         editor.commit();
     }
     
     public void setEmailAddress(String value){
+        this.emailAddress = value;
         editor = settings.edit();
         editor.putString("emailAddress", value);
         editor.commit();
     }
     
     public void setStreetAddress(String value){
+        this.streetAddress = value;
         editor = settings.edit();
         editor.putString("streetAddress", value);
         editor.commit();
     }
     
     public void setCity(String value){
+        this.city = value;
         editor = settings.edit();
         editor.putString("city", value);
         editor.commit();
     }
     
     public void setState(String value){
+        this.state = value;
         editor = settings.edit();
         editor.putString("state", value);
         editor.commit();
     }
     
     public void setZip(String value){
+        this.zip = value;
         editor = settings.edit();
         editor.putString("zip", value);
         editor.commit();
     }
     
     public void setPhoneNumber(String value){
+        this.phoneNumber = value;
         editor = settings.edit();
         editor.putString("phoneNumber", value);
         editor.commit();

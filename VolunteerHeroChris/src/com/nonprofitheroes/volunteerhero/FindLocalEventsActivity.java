@@ -1,13 +1,24 @@
 package com.nonprofitheroes.volunteerhero;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 
 public class FindLocalEventsActivity extends Activity {
+    
+    private static ArrayList<Event> eventList = null;
+    private static Integer clickedIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,8 +26,43 @@ public class FindLocalEventsActivity extends Activity {
         setContentView(R.layout.activity_find_local_events);
         // Show the Up button in the action bar.
         setupActionBar();
+        
+        //Change this to just get set from database
+        ArrayList<Event> events = new ArrayList<Event>();
+        
+        for(Integer num : DatabaseConnection.getEventIds()){
+            Event event = DatabaseConnection.loadEvent(num);
+            events.add(event);
+        }
+        
+        eventList = events;
+        
+        ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(this, R.layout.event_list_layout, events);
+        
+        ListView listView = (ListView) findViewById(R.id.find_local_events_layout);
+        listView.setAdapter(adapter);
+        
+        final FindLocalEventsActivity currentActivity = this;
+        
+        OnItemClickListener messageClickedHandler = new OnItemClickListener() {
+            @SuppressWarnings("rawtypes")
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                // Do something in response to the click
+                clickedIndex = position;
+                Intent intent = new Intent(currentActivity, EventDescriptionActivity.class);
+                startActivity(intent);
+            }
+        };
+        
+        listView.setOnItemClickListener(messageClickedHandler);
+        
     }
 
+    
+    public static Event getEvent(){
+        return eventList.get(clickedIndex);
+    }
+    
     /**
      * Set up the {@link android.app.ActionBar}, if the API is available.
      */
