@@ -17,8 +17,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        DatabaseConnection.getUrl(this);
-        
         settings = getSharedPreferences(PREFS_NAME, 0);
         boolean firstLaunch = settings.getBoolean("firstLaunch", true);
         
@@ -83,7 +81,7 @@ public class MainActivity extends Activity {
         editor.putBoolean("firstLaunch", true);
         editor.commit();
         
-        Intent intent = new Intent(this, FirstLaunchActivity.class);
+        Intent intent = new Intent(this, FirstUseActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

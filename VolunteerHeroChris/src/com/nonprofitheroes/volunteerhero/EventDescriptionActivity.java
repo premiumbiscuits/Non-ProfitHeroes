@@ -1,8 +1,9 @@
 package com.nonprofitheroes.volunteerhero;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
 
 public class EventDescriptionActivity extends Activity {
@@ -21,6 +22,10 @@ public class EventDescriptionActivity extends Activity {
         
         TextView eventContent = (TextView) findViewById(R.id.event_name_content);
         eventContent.setText(event.getContent());
+        
+    }
+    
+    public void rsvp(View view){
         
     }
 

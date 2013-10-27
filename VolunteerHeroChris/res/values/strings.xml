@@ -49,7 +49,8 @@
     <string name="intro_text">Welcome to VolunteerHero!\nIf you have previously created an account, select Recover Account. If you are a new user, select Create Profile.</string>
     <string name="email_hint">email</string>
     <string name="confirmation_code_hint">confirmation code</string>
-    <string name="name_hint">name</string>
+    <string name="first_name_hint">first name</string>
+    <string name="last_name_hint">last name</string>
     <string name="address_hint">address</string>
     <string name="city_hint">city</string>
     <string name="state_hint">state</string>
@@ -58,5 +59,6 @@
     <string name="recover_account_text">Please enter the email and confirmation code associated with the account you would like to recover.</string>
     <string name="warning_incomplete">Please fill out all fields.</string>
     <string name="invalid_title">Invalid Input</string>
+    <string name="rsvp">RSVP!</string>
 
 </resources>

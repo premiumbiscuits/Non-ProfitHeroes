@@ -27,17 +27,10 @@ public class FindLocalEventsActivity extends Activity {
         // Show the Up button in the action bar.
         setupActionBar();
         
-        //Change this to just get set from database
-        ArrayList<Event> events = new ArrayList<Event>();
         
-        for(Integer num : DatabaseConnection.getEventIds()){
-            Event event = DatabaseConnection.loadEvent(num);
-            events.add(event);
-        }
+        eventList = DatabaseConnection.getEvents();
         
-        eventList = events;
-        
-        ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(this, R.layout.event_list_layout, events);
+        ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(this, R.layout.event_list_layout, eventList);
         
         ListView listView = (ListView) findViewById(R.id.find_local_events_layout);
         listView.setAdapter(adapter);

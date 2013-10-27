@@ -1,8 +1,5 @@
 package com.nonprofitheroes.volunteerhero;
 
-import java.util.Calendar;
-import java.util.Date;
-
 public class Event {
     
     private Integer eventId;
@@ -10,7 +7,8 @@ public class Event {
     private String name;
     private String description;
     private String eventType;
-    private Date dateAndTime;
+    private String date;
+    private String time;
     private String address;
     private String city;
     private String state;
@@ -22,7 +20,8 @@ public class Event {
         this.name = "Default Event";
         this.description = "This is a default event used for testing purposes! This is a totally awesome event that you should come to, it'll be fun. No really, if you don't come you're a loser. Hopefull this is long enough.";
         this.eventType = "Default";
-        this.dateAndTime = Calendar.getInstance().getTime();
+        this.date = "1/1/1492";
+        this.time = "12:45";
         this.address = "10 Test St";
         this.city = "Defaultville";
         this.state = "DF";
@@ -31,13 +30,14 @@ public class Event {
     }
     
     public Event(Integer eventId, String organization, String name, String eventType, String description,
-                 Date dateAndTime, String address, String city, String state, String zip){
+                 String date, String time, String address, String city, String state, String zip){
         this.eventId = eventId;
         this.organization = organization;
         this.name = name;
         this.description = description;
         this.eventType = eventType;
-        this.dateAndTime = dateAndTime;
+        this.date = date;
+        this.time = time;
         this.address = address;
         this.city = city;
         this.state = state;
@@ -56,7 +56,7 @@ public class Event {
         builder.append("\n");
         builder.append(this.organization);
         builder.append("\n");
-        builder.append(this.dateAndTime.toString());
+        builder.append(this.date + " " + this.time);
         builder.append("\nDescription: ");
         builder.append(shortDescription);
         return builder.toString();
@@ -72,7 +72,7 @@ public class Event {
         builder.append("Hosted by: ");
         builder.append(this.organization);
         builder.append("\nDate/Time: ");
-        builder.append(this.dateAndTime.toString());
+        builder.append(this.date + " " + this.time);
         builder.append("\nAddress: ");
         builder.append(this.address);
         builder.append(", ");

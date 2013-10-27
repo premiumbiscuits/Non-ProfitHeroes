@@ -18,7 +18,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/name_hint"
+                android:hint="@string/first_name_hint"
+                android:inputType="textPersonName"
+                android:textSize="24sp" />
+            <EditText
+                android:id="@+id/editText8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/last_name_hint"
                 android:inputType="textPersonName"
                 android:textSize="24sp" />
             <EditText

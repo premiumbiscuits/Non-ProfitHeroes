@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings.Secure;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,14 +25,15 @@ public class NewUserActivity extends Activity  {
     public static final String PREFS_NAME = "MyPrefsFile";
     private static SharedPreferences settings;
     private SharedPreferences.Editor editor;
-	private String fullName;
+	private String firstName;
+	private String lastName;
 	private String email;
 	private String phoneNumber;
 	private String address;
 	private String state;
 	private String city;
 	private String zip;
-	//private String deviceId;
+	private String deviceId;
 	
 	 
 	public final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
@@ -90,7 +92,8 @@ public class NewUserActivity extends Activity  {
 	}
 	public void sendMessageCreateProfile(View view){
 		
-		this.fullName = ((EditText)findViewById(R.id.editText1)).getText().toString();
+		this.firstName = ((EditText)findViewById(R.id.editText1)).getText().toString();
+		this.lastName = ((EditText)findViewById(R.id.editText8)).getText().toString();
 		this.email = ((EditText)findViewById(R.id.editText2)).getText().toString();
 		this.phoneNumber = ((EditText)findViewById(R.id.editText3)).getText().toString();
 		this.address = ((EditText)findViewById(R.id.editText4)).getText().toString();
@@ -99,7 +102,7 @@ public class NewUserActivity extends Activity  {
 		this.zip = ((EditText)findViewById(R.id.editText7)).getText().toString();
 		
 		//int check = 0; //if check stays 0, all of the input is valid
-		if(!checkAllFilled(this.fullName, this.email, this.phoneNumber, this.address, this.city, this.state, this.zip)){
+		if(!checkAllFilled(this.firstName, this.lastName, this.email, this.phoneNumber, this.address, this.city, this.state, this.zip)){
 		    //use warningdialog to tell user to fill all fields
 		    //warningDialog(this.fullName + " " + this.email + " " + this.phoneNumber + " " + this.address + " " + this.city + " " + this.state + " " + this.zip);
 			warningDialog(getString(R.string.warning_incomplete));
@@ -111,7 +114,9 @@ public class NewUserActivity extends Activity  {
 		if(check != 0)
 			invalidInput(check);
 		if(check == 0 && infoComplete){
-			addUser(this.fullName, this.email, this.phoneNumber, this.address, this.city, this.state, this.zip);
+			addUser(this.firstName, this.lastName, this.email, this.phoneNumber, this.address, this.city, this.state, this.zip);
+			DatabaseConnection.addUser(this.firstName, this.lastName, this.email, this.phoneNumber, this.address, this.city, this.state, this.zip, this.deviceId);
+			
 			
 			editor = settings.edit();
 	        
@@ -123,9 +128,11 @@ public class NewUserActivity extends Activity  {
 			startActivity(i);
 		}			
 	}
-	private boolean checkAllFilled(String n, String e, String p, String a, String c, String s, String z){
-		if(n.equals(""))
+	private boolean checkAllFilled(String f, String l, String e, String p, String a, String c, String s, String z){
+		if(f.equals(""))
 			return false;
+		if(l.equals(""))
+            return false;
 		if(e.equals(""))
 			return false;
 		if(p.equals(""))
@@ -169,9 +176,10 @@ public class NewUserActivity extends Activity  {
 		}
 		return true;
 	}
-	private void addUser(String name, String email, String phone, String adress, String city, String state, String zip){
+	private void addUser(String firstName, String lastName, String email, String phone, String address, String city, String state, String zip){
 		//editor.putBoolean("silentMode", true);
-		this.setFullName(name);
+	    this.setFirstName(firstName);
+	    this.setLastName(lastName);
 		this.setEmailAddress(email);
 		this.setPhoneNumber(phone);
 		this.setStreetAddress(address);
@@ -180,30 +188,16 @@ public class NewUserActivity extends Activity  {
 		this.setZip(zip);
 		this.setDeviceId();
 	}
-	/*public void setFirstName(String value){
+	private void setFirstName(String value){
         editor = settings.edit();
         editor.putString("firstName", value);
         editor.commit();
     }
     
-    public void setLastName(String value){
+    private void setLastName(String value){
         editor = settings.edit();
         editor.putString("lastName", value);
         editor.commit();
-    }*/
-	
-    private void setFullName(String value){
-    	editor = settings.edit();
-    	/*
-    	editor.putString("fullName", value);
-    	*/
-    	
-    	//HACKY WORK AROUND, NEED TO SEPERATE FIRST/LAST NAMES IN USER INPUT
-    	String[] names = value.split(" ");
-    	editor.putString("firstName", names[0]);
-    	editor.putString("lastName", names[1]);
-    	editor.commit();
-    	
     }
     
     private void setEmailAddress(String value){
@@ -241,9 +235,11 @@ public class NewUserActivity extends Activity  {
         editor.commit();
     }
     private void setDeviceId(){
+        this.deviceId = Secure.getString(this.getContentResolver(), Secure.ANDROID_ID); 
+        
     	editor = settings.edit();
-    	
-    	
+    	editor.putString("deviceId", this.deviceId);
+    	editor.commit();
     }
     private void invalidInput(int value){
     	if(value == 1){ //invalid email
