@@ -2,7 +2,7 @@ package com.nonprofitheroes.volunteerhero;
 
 public class Event {
     
-    private Integer eventId;
+    private String eventId;
     private String organization;
     private String name;
     private String description;
@@ -13,12 +13,14 @@ public class Event {
     private String city;
     private String state;
     private String zip;
+    private Boolean hasMultiplier;
     
     public Event(){
-        this.eventId = -1;
+        // Default constructor used for testing before database values were available
+        this.eventId = "-1";
         this.organization = "Default Charity";
         this.name = "Default Event";
-        this.description = "This is a default event used for testing purposes! This is a totally awesome event that you should come to, it'll be fun. No really, if you don't come you're a loser. Hopefull this is long enough.";
+        this.description = "This is a default event used for testing purposes! This is a totally awesome event that you should come to, it'll be fun. No really, if you don't come you're a loser. Hopefully this is long enough.";
         this.eventType = "Default";
         this.date = "1/1/1492";
         this.time = "12:45";
@@ -29,8 +31,8 @@ public class Event {
         
     }
     
-    public Event(Integer eventId, String organization, String name, String eventType, String description,
-                 String date, String time, String address, String city, String state, String zip){
+    public Event(String eventId, String organization, String name, String eventType, String description,
+                 String date, String time, String address, String city, String state, String zip, String hasMultiplier){
         this.eventId = eventId;
         this.organization = organization;
         this.name = name;
@@ -42,10 +44,12 @@ public class Event {
         this.city = city;
         this.state = state;
         this.zip = zip;
+        this.hasMultiplier = hasMultiplier.equals("1");
     }
     
     @Override
     public String toString(){
+        //Text to be displayed in events list with abbreviated description.
         String shortDescription = this.description;
         if(shortDescription.length() > 100){
             shortDescription = shortDescription.substring(0, 100) + "...";
@@ -67,6 +71,7 @@ public class Event {
     }
     
     public String getContent(){
+        //Full event description
         StringBuilder builder = new StringBuilder();
         
         builder.append("Hosted by: ");
@@ -84,5 +89,17 @@ public class Event {
         builder.append("\nDescription:\n");
         builder.append(this.description);
         return builder.toString();
+    }
+    
+    public String getId(){
+        return this.eventId;
+    }
+    
+    public String getOrganization(){
+        return this.organization;
+    }
+    
+    public Boolean getHasMultiplier(){
+        return hasMultiplier;
     }
 }

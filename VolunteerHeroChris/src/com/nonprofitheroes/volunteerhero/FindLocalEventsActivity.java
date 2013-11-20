@@ -27,9 +27,10 @@ public class FindLocalEventsActivity extends Activity {
         // Show the Up button in the action bar.
         setupActionBar();
         
-        
+        //Load list of events from database
         eventList = DatabaseConnection.getEvents();
         
+        //Put event list into a list view.  Calls toString() on each event in the list
         ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(this, R.layout.event_list_layout, eventList);
         
         ListView listView = (ListView) findViewById(R.id.find_local_events_layout);
@@ -37,6 +38,7 @@ public class FindLocalEventsActivity extends Activity {
         
         final FindLocalEventsActivity currentActivity = this;
         
+        //Bind an onclick listener to event list to determine which event was selected
         OnItemClickListener messageClickedHandler = new OnItemClickListener() {
             @SuppressWarnings("rawtypes")
             public void onItemClick(AdapterView parent, View v, int position, long id) {
@@ -53,6 +55,7 @@ public class FindLocalEventsActivity extends Activity {
 
     
     public static Event getEvent(){
+        //Returns the selected event
         return eventList.get(clickedIndex);
     }
     

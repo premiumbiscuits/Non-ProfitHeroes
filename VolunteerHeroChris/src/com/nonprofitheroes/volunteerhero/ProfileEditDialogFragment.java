@@ -42,6 +42,7 @@ public class ProfileEditDialogFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View inflatedView = inflater.inflate(R.layout.edit_dialog, null);
         
+        //Create dialog and bind on click listeners
         builder.setTitle(R.string.profile_edit)
                .setView(inflatedView)
                .setPositiveButton(R.string.change, new DialogInterface.OnClickListener() {

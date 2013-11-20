@@ -20,6 +20,7 @@ public class MyProfileActivity extends FragmentActivity implements ProfileEditDi
     
     private int field = -1;
     
+    //On click listener for dialog's okay button
     @Override
     public void onDialogPositiveClick(ProfileEditDialogFragment dialog) {
         // User touched the dialog's positive button
@@ -63,6 +64,7 @@ public class MyProfileActivity extends FragmentActivity implements ProfileEditDi
     protected void onResume(){
         super.onResume();
         
+        // Load user values from shared preferences
         settings = getSharedPreferences(PREFS_NAME, 0);
         this.user = new User(settings);
         
@@ -70,6 +72,7 @@ public class MyProfileActivity extends FragmentActivity implements ProfileEditDi
         
     }
 
+    // Displays user values in their corresponding text views.
     private void setTextViews(){
         TextView firstName = (TextView) findViewById(R.id.my_profile_first_value);
         firstName.setText(this.user.getFirstName());
@@ -96,11 +99,13 @@ public class MyProfileActivity extends FragmentActivity implements ProfileEditDi
         phone.setText(this.user.getPhoneNumber());
     }
     
+    // Opens dialog used to edit user values.
     private void openDialog(){
         ProfileEditDialogFragment newFragment = new ProfileEditDialogFragment();
         newFragment.show(getSupportFragmentManager(), "edit_fragment");
     }
     
+    // Updates display of a textview if user changes its value
     private void updateField(final int viewId, final String value){
         runOnUiThread(new Runnable() {
             @Override
@@ -124,12 +129,14 @@ public class MyProfileActivity extends FragmentActivity implements ProfileEditDi
         
     }
     
+    // Functions for buttons and validating user input then updating the field.
     public void firstClick(View view){
         this.field = FIRST;
         openDialog();
     }
     
     private void updateFirst(String value){
+        //Check if name was changed and if it's too long
         if (value.equals(this.user.getFirstName())){
             warningDialog(getString(R.string.unchanged));
             return;
@@ -150,6 +157,7 @@ public class MyProfileActivity extends FragmentActivity implements ProfileEditDi
     }
     
     private void updateLast(String value){
+        // Check if name was changed and if it's too long
         if (value.equals(this.user.getLastName())){
             warningDialog(getString(R.string.unchanged));
             return;
@@ -235,6 +243,7 @@ public class MyProfileActivity extends FragmentActivity implements ProfileEditDi
             return;
         }
         
+        // Regex match to one of 50 valid state codes.
         if(!value.matches("AL|AK|AR|AZ|CA|CO|CT|DC|DE|FL|GA|HI|IA|ID|IL|IN|KS|KY|LA|MA|MD|ME|MI|MN|MO|MS|MT|NC|ND|NE|NH|NJ|NM|NV|NY|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VA|VT|WA|WI|WV|WY")){
             warningDialog(getString(R.string.bad_state));
             return;
@@ -255,6 +264,7 @@ public class MyProfileActivity extends FragmentActivity implements ProfileEditDi
             return;
         }
         
+        //Regex match to 5 digits
         if(!value.matches("\\d\\d\\d\\d\\d")){
             warningDialog(getString(R.string.bad_zip));
             return;
@@ -275,6 +285,7 @@ public class MyProfileActivity extends FragmentActivity implements ProfileEditDi
             return;
         }
         
+        //Regex match to 9 digits
         if(!value.matches("\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d")){
             warningDialog(getString(R.string.bad_phone));
             return;
@@ -315,6 +326,7 @@ public class MyProfileActivity extends FragmentActivity implements ProfileEditDi
         return super.onOptionsItemSelected(item);
     }
     
+    // Constants for each field.
     private static final int FIRST = 1;
     private static final int LAST = 2;
     private static final int EMAIL = 3;

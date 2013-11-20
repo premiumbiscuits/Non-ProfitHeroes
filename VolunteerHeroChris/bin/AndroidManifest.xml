@@ -76,6 +76,10 @@
             android:name="com.nonprofitheroes.volunteerhero.RecoverAccountActivity"
             android:label="@string/title_activity_recover_account" >
         </activity>
+        <activity
+            android:name="com.nonprofitheroes.volunteerhero.AttendEventActivity"
+            android:label="@string/title_activity_attend_event" >
+        </activity>
     </application>
 
 </manifest>

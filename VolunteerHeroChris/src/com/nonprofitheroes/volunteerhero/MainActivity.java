@@ -17,6 +17,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        // Check if the user has used the app previously and if not, redirect to first use activity
         settings = getSharedPreferences(PREFS_NAME, 0);
         boolean firstLaunch = settings.getBoolean("firstLaunch", true);
         
@@ -32,6 +33,7 @@ public class MainActivity extends Activity {
     protected void onResume(){
         super.onResume();
         
+        // Check if the user has used the app previously and if not, redirect to first use activity
         settings = getSharedPreferences(PREFS_NAME, 0);
         boolean firstLaunch = settings.getBoolean("firstLaunch", true);
         
@@ -50,6 +52,7 @@ public class MainActivity extends Activity {
         return true;
     }
     
+    // Button functions to launch various screens
     public void openMyCharities(View view){
         Intent intent = new Intent(this, MyCharitiesActivity.class);
         startActivity(intent);
@@ -70,6 +73,10 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
     
+    
+    //Resets shared preferences resetting app
+    // Used for testing purposes only, does not sync with database.  Need manual
+    // removal from database after use.
     public void resetProfile(View view){
         settings = getSharedPreferences(PREFS_NAME, 0);
         editor = settings.edit();

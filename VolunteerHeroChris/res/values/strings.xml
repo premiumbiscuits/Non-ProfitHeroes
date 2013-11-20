@@ -43,7 +43,7 @@
     <string name="title_activity_event_description">Event Description</string>
     <string name="title_activity_first_use">Welcome!</string>
     <string name="title_activity_new_user">Tell Us About Yourself!</string>
-    <string name="title_activity_recover_account">Recover Your Account</string>    
+    <string name="title_activity_recover_account">Recover Your Account</string>
     <string name="create_profile1_button">Create Profile</string>
     <string name="recover_account_button">Recover Account</string>
     <string name="intro_text">Welcome to VolunteerHero!\nIf you have previously created an account, select Recover Account. If you are a new user, select Create Profile.</string>
@@ -60,5 +60,12 @@
     <string name="warning_incomplete">Please fill out all fields.</string>
     <string name="invalid_title">Invalid Input</string>
     <string name="rsvp">RSVP!</string>
+    <string name="warn_rsvp">You already RSVP\'d for this event.</string>
+    <string name="title_activity_attend_event">Details</string>
+    <string name="attend">Confirm Attendance!</string>
+    <string name="confirm">Enter Confirmation Code:</string>
+    <string name="hours"># of Hours:</string>
+    <string name="bad_confirm">Confirmation code entered was invalid.</string>
+    <string name="good_confirm">Confirmation Successful!</string>
 
 </resources>

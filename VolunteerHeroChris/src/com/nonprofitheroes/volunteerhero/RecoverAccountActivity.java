@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+//FUNCTIONALITY NOT IMPLEMENTED
+
 public class RecoverAccountActivity extends Activity {
 	
 	private String email;

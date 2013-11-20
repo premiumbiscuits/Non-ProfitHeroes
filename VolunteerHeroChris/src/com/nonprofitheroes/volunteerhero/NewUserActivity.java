@@ -35,7 +35,7 @@ public class NewUserActivity extends Activity  {
 	private String zip;
 	private String deviceId;
 	
-	 
+	//Email matcher regex
 	public final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
 	          "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
 	          "\\@" +
@@ -90,6 +90,8 @@ public class NewUserActivity extends Activity  {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	//Button function for creating profile
 	public void sendMessageCreateProfile(View view){
 		
 		this.firstName = ((EditText)findViewById(R.id.editText1)).getText().toString();
@@ -100,19 +102,19 @@ public class NewUserActivity extends Activity  {
 		this.state = ((EditText)findViewById(R.id.editText5)).getText().toString();
 		this.city = ((EditText)findViewById(R.id.editText6)).getText().toString();
 		this.zip = ((EditText)findViewById(R.id.editText7)).getText().toString();
-		
-		//int check = 0; //if check stays 0, all of the input is valid
 		if(!checkAllFilled(this.firstName, this.lastName, this.email, this.phoneNumber, this.address, this.city, this.state, this.zip)){
 		    //use warningdialog to tell user to fill all fields
-		    //warningDialog(this.fullName + " " + this.email + " " + this.phoneNumber + " " + this.address + " " + this.city + " " + this.state + " " + this.zip);
 			warningDialog(getString(R.string.warning_incomplete));
 		}
 		else{
 			infoComplete = true;
 		}
 		int check = checkValidity(this.email, this.phoneNumber, this.zip);
-		if(check != 0)
+		if(check != 0){
 			invalidInput(check);
+		}
+		
+		// If checks are successful, add user then go to main activity
 		if(check == 0 && infoComplete){
 			addUser(this.firstName, this.lastName, this.email, this.phoneNumber, this.address, this.city, this.state, this.zip);
 			DatabaseConnection.addUser(this.firstName, this.lastName, this.email, this.phoneNumber, this.address, this.city, this.state, this.zip, this.deviceId);
@@ -128,6 +130,7 @@ public class NewUserActivity extends Activity  {
 			startActivity(i);
 		}			
 	}
+	//Ensure all fields have a value.
 	private boolean checkAllFilled(String f, String l, String e, String p, String a, String c, String s, String z){
 		if(f.equals(""))
 			return false;
@@ -177,7 +180,6 @@ public class NewUserActivity extends Activity  {
 		return true;
 	}
 	private void addUser(String firstName, String lastName, String email, String phone, String address, String city, String state, String zip){
-		//editor.putBoolean("silentMode", true);
 	    this.setFirstName(firstName);
 	    this.setLastName(lastName);
 		this.setEmailAddress(email);

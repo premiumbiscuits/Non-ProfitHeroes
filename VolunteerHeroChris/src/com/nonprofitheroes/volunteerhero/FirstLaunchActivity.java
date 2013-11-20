@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+//This class is no longer used, replaced by first use activity.
+
 public class FirstLaunchActivity extends Activity {
     public static final String PREFS_NAME = "MyPrefsFile";
     static private SharedPreferences settings;
@@ -18,6 +20,7 @@ public class FirstLaunchActivity extends Activity {
     }
     
     public void createProfile(View view){
+        // Mock profile creation, sets first launch flag to false.
         settings = getSharedPreferences(PREFS_NAME, 0);
         editor = settings.edit();
         
@@ -30,6 +33,7 @@ public class FirstLaunchActivity extends Activity {
     }
     
     public void resetProfile(View view){
+        // Clears shared preferences, effectively resetting app.
         settings = getSharedPreferences(PREFS_NAME, 0);
         editor = settings.edit();
         

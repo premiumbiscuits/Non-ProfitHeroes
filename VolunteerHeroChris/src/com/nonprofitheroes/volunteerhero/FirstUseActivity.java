@@ -22,11 +22,13 @@ public class FirstUseActivity extends Activity {
         return true;
     }
     public void sendMessageCreateAccount(View view){
-    	
+    	// Button function to start new user activity
     	Intent i = new Intent(this, NewUserActivity.class);
 		startActivity(i);
     }
     public void sendMessageRecoverAccount(View view){
+        // Button function to start recover account.
+        // Not implemented.
     	Intent i = new Intent(this, RecoverAccountActivity.class);
 		startActivity(i);
     	

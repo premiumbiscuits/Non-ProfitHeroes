@@ -21,6 +21,7 @@ public class User {
     private String phoneNumber;
     private Set<String> skills;
     
+    // Create a user object using values from shared preferences. Default values included for testing
     public User(SharedPreferences sharedPreferences){
         settings = sharedPreferences;
         this.deviceId = settings.getString("deviceId", "");
@@ -75,11 +76,14 @@ public class User {
         return this.skills;
     }
     
+    //Setters that update fields in SharedPreferences and Database
+    
     public void setFirstName(String value){
         this.firstName = value;
         editor = settings.edit();
         editor.putString("firstName", value);
         editor.commit();
+        DatabaseConnection.updateUserField("first_name", value, settings.getString("deviceId", ""));
     }
     
     public void setLastName(String value){
@@ -87,6 +91,7 @@ public class User {
         editor = settings.edit();
         editor.putString("lastName", value);
         editor.commit();
+        DatabaseConnection.updateUserField("last_name", value, settings.getString("deviceId", ""));
     }
     
     public void setEmailAddress(String value){
@@ -94,6 +99,7 @@ public class User {
         editor = settings.edit();
         editor.putString("emailAddress", value);
         editor.commit();
+        DatabaseConnection.updateUserField("email_address", value, settings.getString("deviceId", ""));
     }
     
     public void setStreetAddress(String value){
@@ -101,6 +107,7 @@ public class User {
         editor = settings.edit();
         editor.putString("streetAddress", value);
         editor.commit();
+        DatabaseConnection.updateUserField("street_address", value, settings.getString("deviceId", ""));
     }
     
     public void setCity(String value){
@@ -108,6 +115,7 @@ public class User {
         editor = settings.edit();
         editor.putString("city", value);
         editor.commit();
+        DatabaseConnection.updateUserField("city", value, settings.getString("deviceId", ""));
     }
     
     public void setState(String value){
@@ -115,6 +123,7 @@ public class User {
         editor = settings.edit();
         editor.putString("state", value);
         editor.commit();
+        DatabaseConnection.updateUserField("state", value, settings.getString("deviceId", ""));
     }
     
     public void setZip(String value){
@@ -122,6 +131,7 @@ public class User {
         editor = settings.edit();
         editor.putString("zip", value);
         editor.commit();
+        DatabaseConnection.updateUserField("zip", value, settings.getString("deviceId", ""));
     }
     
     public void setPhoneNumber(String value){
@@ -129,5 +139,6 @@ public class User {
         editor = settings.edit();
         editor.putString("phoneNumber", value);
         editor.commit();
+        DatabaseConnection.updateUserField("phone_number", value, settings.getString("deviceId", ""));
     }
 }

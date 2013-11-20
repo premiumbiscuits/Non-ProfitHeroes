@@ -19,6 +19,7 @@
         android:textAlignment="center"
         android:textSize="22sp" />
 
+    <!--  FEATURE NOT IMPLEMENTED
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
@@ -30,6 +31,7 @@
         android:onClick="sendMessageRecoverAccount"
         android:text="@string/recover_account_button"
         android:textSize="30sp" />
+    -->
 
     <Button
         android:id="@+id/button1"
