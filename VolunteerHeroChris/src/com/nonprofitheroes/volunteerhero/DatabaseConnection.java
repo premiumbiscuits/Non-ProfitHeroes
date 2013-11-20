@@ -112,11 +112,11 @@ public class DatabaseConnection {
                     list.add(new Event(eventId, organization, name, eventType, description, date, time, address, city, state, zip, hasMultiplier));
             }
              
-            }catch(JSONException e1){
-                e1.printStackTrace();
-            }catch (ParseException e1){
-                e1.printStackTrace();
-            }
+        }catch(JSONException e1){
+            e1.printStackTrace();
+        }catch (ParseException e1){
+            e1.printStackTrace();
+        }
             
         
         return list;
@@ -132,6 +132,7 @@ public class DatabaseConnection {
     }
     
     public static String confirmAttendance(Event event, String deviceId, String confirmationCode, String multiplier){
+        // Confirm a user's attendance at an event
         List<NameValuePair> data = new ArrayList<NameValuePair>();
         data.add(new BasicNameValuePair("device_id", deviceId));
         data.add(new BasicNameValuePair("event_id", event.getId()));
@@ -149,5 +150,105 @@ public class DatabaseConnection {
         data.add(new BasicNameValuePair("device_id", deviceId));
         
         getResponse(doPost("http://54.235.144.121/VolunteerHero/AndroidDatabaseScripts/update_volunteer.php", data));
+    }
+    
+    public static Charity getCharity(String charityName){
+        List<NameValuePair> data = new ArrayList<NameValuePair>();
+        data.add(new BasicNameValuePair("organization_name", charityName));
+        
+        String response = getResponse(doPost("http://54.235.144.121/VolunteerHero/AndroidDatabaseScripts/organization_info.php", data));
+        Charity charity = null;
+        
+        try{
+            //Pull data from JSON response.
+            JSONArray jsonArray = new JSONArray(response);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonData = jsonArray.getJSONObject(i);
+                String id = jsonData.getString("id");
+                String name = jsonData.getString("name");
+                String address = jsonData.getString("street_address");
+                String city = jsonData.getString("city");
+                String state = jsonData.getString("state");
+                String zip = jsonData.getString("zip");
+                String phone = jsonData.getString("phone");
+                String email = jsonData.getString("email_address");
+                //create charity from json data
+                charity = new Charity(id, name, address, city, state, zip, phone, email);
+        }
+            
+        } catch(JSONException e1){
+            e1.printStackTrace();
+        } catch (ParseException e1){
+            e1.printStackTrace();
+        }
+        
+        return charity;
+    }
+    
+    public static Integer getPoints(String deviceId, String orgName){
+        //Get user's points with an organization
+        List<NameValuePair> data = new ArrayList<NameValuePair>();
+        data.add(new BasicNameValuePair("device_id", deviceId));
+        
+        Integer result = 0;
+        
+        String response = getResponse(doPost("http://54.235.144.121/VolunteerHero/AndroidDatabaseScripts/get_volunteer_points.php", data));
+        
+        try{
+            //Pull data from JSON response.
+            JSONArray jsonArray = new JSONArray(response);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonData = jsonArray.getJSONObject(i);
+                String name = jsonData.getString("name");
+                String points = jsonData.getString("SUM(event.point_value * attendance.point_multiplier)");
+                
+                // If value is for desired organization, get points and break
+                if (name.equals(orgName)){
+                    result = Integer.parseInt(points);
+                    break;
+                }
+                
+                
+            }
+        } catch(Exception exception){
+            // Occurs if user has no points with any charities
+            return 0;
+        }
+        
+        return result;
+    }
+    
+    public static List<RewardLevel> getLevels(String organizationId){
+        ArrayList<RewardLevel> levels = new ArrayList<RewardLevel>();
+        
+        List<NameValuePair> data = new ArrayList<NameValuePair>();
+        data.add(new BasicNameValuePair("organization_id", organizationId));
+        
+        String response = getResponse(doPost("http://54.235.144.121/VolunteerHero/AndroidDatabaseScripts/reward_levels.php", data));
+        
+        //Strip whitespace, will be null if no points with this charity
+        if (!response.replaceAll("\\s+","").equals("null")){
+            try{
+                //Pull data from JSON response.
+                JSONArray jsonArray = new JSONArray(response);
+                
+                //Get the info for each level
+                for(int i=0;i<jsonArray.length();i++){
+                        JSONObject jsonData = jsonArray.getJSONObject(i);
+                        String name = jsonData.getString("level_name");
+                        String pointValue = jsonData.getString("sequence");
+                        String reward = jsonData.getString("reward");
+                        
+                        levels.add(new RewardLevel(name, Integer.parseInt(pointValue), reward));
+                }
+                 
+            }catch(JSONException e1){
+                e1.printStackTrace();
+            }catch (ParseException e1){
+                e1.printStackTrace();
+            }
+        }
+        
+        return levels;
     }
 }

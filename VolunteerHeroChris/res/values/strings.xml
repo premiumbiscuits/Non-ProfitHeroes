@@ -67,5 +67,9 @@
     <string name="hours"># of Hours:</string>
     <string name="bad_confirm">Confirmation code entered was invalid.</string>
     <string name="good_confirm">Confirmation Successful!</string>
+    <string name="rsvp_thanks">Thank you for RSVP\'ing!</string>
+    <string name="title_activity_charity_info">Charity Info</string>
+    <string name="completed">Completed Reward Levels:</string>
+    <string name="next">Next Reward Level:</string>
 
 </resources>

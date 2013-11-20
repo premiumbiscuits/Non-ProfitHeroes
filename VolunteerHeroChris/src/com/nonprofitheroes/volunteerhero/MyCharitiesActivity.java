@@ -1,13 +1,28 @@
 package com.nonprofitheroes.volunteerhero;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 
 public class MyCharitiesActivity extends Activity {
+    
+    private static ArrayList<String> charities = null;
+    private static Integer clickedIndex = -1;
+    public static final String PREFS_NAME = "MyPrefsFile";
+    static SharedPreferences settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +30,42 @@ public class MyCharitiesActivity extends Activity {
         setContentView(R.layout.activity_my_charities);
         // Show the Up button in the action bar.
         setupActionBar();
+        
+        //Load charities List
+        settings = getSharedPreferences(PREFS_NAME, 0);
+        String charityString = settings.getString("charities", "");
+        charities = new ArrayList<String>();
+        
+        for (String charity : Arrays.asList(charityString.split(";"))){
+            if (!charity.equals("")){
+                charities.add(charity);
+            }
+        }
+        
+        // Put Charities into a list view
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.charity_list_layout, charities);
+        
+        ListView listView = (ListView) findViewById(R.id.my_charities_layout);
+        listView.setAdapter(adapter);
+        
+        final MyCharitiesActivity currentActivity = this;
+        
+        // On click handler for list view
+        OnItemClickListener messageClickedHandler = new OnItemClickListener() {
+            @SuppressWarnings("rawtypes")
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                // Do something in response to the click
+                clickedIndex = position;
+                Intent intent = new Intent(currentActivity, CharityInfoActivity.class);
+                startActivity(intent);
+            }
+        };
+        
+        listView.setOnItemClickListener(messageClickedHandler);
+    }
+    
+    public static String getCharity(){
+        return charities.get(clickedIndex);
     }
 
     /**

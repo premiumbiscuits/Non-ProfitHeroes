@@ -102,4 +102,8 @@ public class Event {
     public Boolean getHasMultiplier(){
         return hasMultiplier;
     }
+    
+    public String getEventType(){
+        return this.eventType;
+    }
 }

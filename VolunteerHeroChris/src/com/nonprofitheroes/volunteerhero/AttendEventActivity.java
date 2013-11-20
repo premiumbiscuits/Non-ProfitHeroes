@@ -27,10 +27,10 @@ public class AttendEventActivity extends Activity {
         
         //Fill out info fields on screen from event
         TextView eventName = (TextView) findViewById(R.id.attend_event_name);
-        eventName.setText(event.getName());
+        eventName.setText(this.event.getName());
         
         TextView eventContent = (TextView) findViewById(R.id.attend_event_name_content);
-        eventContent.setText(event.getContent());
+        eventContent.setText(this.event.getContent());
     }
     
     public void attend(View view){
@@ -54,6 +54,7 @@ public class AttendEventActivity extends Activity {
             warnWrongCode();
         }
         else{
+            //Use an Android toast to tell user confirmation was successful
             Context context = getApplicationContext();
             CharSequence text = getResources().getString(R.string.good_confirm);
             int duration = Toast.LENGTH_SHORT;

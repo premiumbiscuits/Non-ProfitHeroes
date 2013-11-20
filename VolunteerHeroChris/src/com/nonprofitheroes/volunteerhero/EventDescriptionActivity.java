@@ -5,12 +5,14 @@ import java.util.HashSet;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EventDescriptionActivity extends Activity {
     public static final String PREFS_NAME = "MyPrefsFile";
@@ -71,6 +73,11 @@ public class EventDescriptionActivity extends Activity {
         
         //Add rsvp information to database
         DatabaseConnection.rsvp(this.event, settings.getString("deviceId", ""));
+        
+        Context context = getApplicationContext();
+        CharSequence text = getResources().getString(R.string.rsvp_thanks);
+        int duration = Toast.LENGTH_SHORT;
+        Toast.makeText(context, text, duration).show();
     }
     
     private void warnAlreadyRsvp(){

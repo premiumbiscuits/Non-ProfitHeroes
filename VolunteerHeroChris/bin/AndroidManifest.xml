@@ -80,6 +80,10 @@
             android:name="com.nonprofitheroes.volunteerhero.AttendEventActivity"
             android:label="@string/title_activity_attend_event" >
         </activity>
+        <activity
+            android:name="com.nonprofitheroes.volunteerhero.CharityInfoActivity"
+            android:label="@string/title_activity_charity_info" >
+        </activity>
     </application>
 
 </manifest>
